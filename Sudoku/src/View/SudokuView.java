@@ -2,22 +2,23 @@ package View;
 
 import Constants.SizeFrame;
 import Constants.SudokuConfig;
+import Model.Sudoku9x9;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SudokuView extends JFrame {
-    private JPanel mainPanel;
-    private SudokuPanel sudokuPanel;
-    private JPanel wrapSudokuPanel;
-    private OptionPanel optionPanel;
-    private JPanel northPanel;
-    private JPanel southPanel;
+    final private JPanel mainPanel;
+    private final SudokuPanel sudokuPanel;
+    private final JPanel wrapSudokuPanel;
+    private final OptionPanel optionPanel;
+    private final JPanel northPanel;
+    private final JPanel southPanel;
     private JPanel westPanel;
     public SudokuView() {
         mainPanel = new JPanel();
         sudokuPanel = new SudokuPanel(SudokuConfig.SUDOKU9X9_SIZE);
-        optionPanel = new OptionPanel();
+        optionPanel = new OptionPanel(this);
         northPanel = new JPanel();
         southPanel = new JPanel();
         westPanel = new JPanel();
@@ -29,13 +30,8 @@ public class SudokuView extends JFrame {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
         /*
@@ -43,7 +39,7 @@ public class SudokuView extends JFrame {
         */
         this.setTitle("Sudoku Game");
         this.setMinimumSize(new Dimension(SizeFrame.WIDTH, SizeFrame.HEIGHT));
-        this.setLocationRelativeTo((Component) null);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         /*
         * Chỉnh wrapSudokuPanel
@@ -73,5 +69,13 @@ public class SudokuView extends JFrame {
 
         this.setContentPane(mainPanel);
         this.setVisible(true);
+    }
+
+    public SudokuPanel getSudokuPanel() {
+        return sudokuPanel;
+    }
+
+    public OptionPanel getOptionPanel() {
+        return optionPanel;
     }
 }
