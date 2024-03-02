@@ -37,4 +37,8 @@ public class Coordinates {
     public int hashCode() {
         return super.hashCode();
     }
+    @Override
+    public String toString() {
+        return String.format("(%d, %d)", x, y);
+    }
 }
