@@ -1,8 +1,9 @@
 package View;
 
+import Constants.ColorConfig;
+import Constants.FontConfig;
 import Constants.SizeFrame;
 import Constants.SudokuConfig;
-import Model.Sudoku9x9;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +16,10 @@ public class SudokuView extends JFrame {
     private final JPanel northPanel;
     private final JPanel southPanel;
     private JPanel westPanel;
+    private JLabel messageLabel;
     public SudokuView() {
         mainPanel = new JPanel();
-        sudokuPanel = new SudokuPanel(SudokuConfig.SUDOKU9X9_SIZE);
+        sudokuPanel = new SudokuPanel(SudokuConfig.SUDOKU9X9_SIZE, this);
         optionPanel = new OptionPanel(this);
         northPanel = new JPanel();
         southPanel = new JPanel();
@@ -50,7 +52,7 @@ public class SudokuView extends JFrame {
         wrapSudokuPanel.add(sudokuPanel, BorderLayout.CENTER);
         wrapSudokuPanel.setBackground(new Color(0xF9F2F2));
         /*
-        *Chỉnh sửa thông số mainPane
+        * Chỉnh sửa thông số mainPane
         */
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(wrapSudokuPanel, BorderLayout.CENTER);
@@ -60,13 +62,23 @@ public class SudokuView extends JFrame {
         mainPanel.add(westPanel, BorderLayout.WEST);
 
         /*
-        *Chỉnh sửa sudokuPane
+        * Chỉnh sửa sudokuPane
         */
-            sudokuPanel.generateSudokuBoard(null);
+            sudokuPanel.generateSudokuBoard();
         /*
         * Chỉnh sửa optionPane
         */
 
+        // Message label
+        messageLabel = new JLabel();
+        messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        messageLabel.setVerticalAlignment(SwingConstants.CENTER);
+        messageLabel.setFont(FontConfig.KEY_SUDOKU);
+        messageLabel.setForeground(new Color(ColorConfig.COLOR_MESSAGE_RGB));
+        messageLabel.setBackground(Color.LIGHT_GRAY);
+        messageLabel.setOpaque(true);
+
+        this.optionPanel.add(messageLabel);
         this.setContentPane(mainPanel);
         this.setVisible(true);
     }
@@ -75,7 +87,7 @@ public class SudokuView extends JFrame {
         return sudokuPanel;
     }
 
-    public OptionPanel getOptionPanel() {
-        return optionPanel;
+    public void setMessage(String message) {
+        this.messageLabel.setText(message);
     }
 }

@@ -74,16 +74,6 @@ public class Sudoku9x9 extends Sudoku{
         generateASudokuHelper(0);
     }
 
-    public void print() {
-        int i;
-        for (i = 0; i < sudokuBoard.length; ++i)
-            System.out.println(Arrays.toString(sudokuBoard[i]));
-    }
-    public static void main(String[] args) {
-        var x = new Sudoku9x9();
-        x.generateASudoku();
-        x.print();
-    }
     public boolean isCorrectNumber(Coordinates c, String number) {
         return String.valueOf(sudokuBoard[c.getX()][c.getY()]).equals(number);
     }

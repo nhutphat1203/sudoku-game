@@ -14,7 +14,7 @@ public class KeyAction extends MouseInputAdapter {
     public void mouseClicked(MouseEvent e) {
         KeyLabel k = (KeyLabel) e.getSource();
         sp.changeColorAfterClicked(k.getCoordinates());
-        System.out.println(k.getCoordinates());
+        //System.out.println(k.getCoordinates());
     }
 
 }

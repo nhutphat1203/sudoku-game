@@ -27,7 +27,7 @@ public class Coordinates {
 
     @Override
     public boolean equals(Object obj) {
-        if (this != obj || getClass() != obj.getClass())
+        if (this != obj)
             return false;
         Coordinates that = (Coordinates) obj;
         return x == that.x && y == that.y;
