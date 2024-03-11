@@ -27,6 +27,8 @@ public class SudokuPanel extends JPanel {
     private GameState state;
     private Enum<LevelGame> levelGame;
     private final SudokuView sv;
+    private final List<Integer> listShuffle;
+
     public SudokuPanel(int typeSudokuSize, SudokuView sv) {
         this.sv = sv;
         levelGame = LevelGame.EASY;
@@ -52,6 +54,10 @@ public class SudokuPanel extends JPanel {
                 matrixKey[i][j] = current;
             }
         }
+        final int max = SudokuConfig.SUDOKU9X9_SIZE * SudokuConfig.SUDOKU9X9_SIZE;
+        listShuffle = new ArrayList<>(max);
+        for (i = 0; i < max; ++i)
+            listShuffle.add(i);
         initSetting();
     }
     public boolean isTheFirstTimePLayGame() {
@@ -156,12 +162,9 @@ public class SudokuPanel extends JPanel {
     }
     public void startSudoku() {
         modelSudoku.generateASudoku();
-        int max = SudokuConfig.SUDOKU9X9_SIZE * SudokuConfig.SUDOKU9X9_SIZE;
-        List<Integer> A = new ArrayList<>(max);
+        final int max = SudokuConfig.SUDOKU9X9_SIZE * SudokuConfig.SUDOKU9X9_SIZE;
         int i, x, y;
-        for (i = 0; i < max; ++i)
-            A.add(i);
-        Collections.shuffle(A);
+        Collections.shuffle(listShuffle);
         int lv;
         if (levelGame == LevelGame.EASY)
             lv = SudokuConfig.LEVEL_EASY;
@@ -171,8 +174,8 @@ public class SudokuPanel extends JPanel {
             lv = SudokuConfig.LEVEL_HARD;
         state = new GameState(lv, max);
         for (i = 0; i < lv; ++i) {
-            x = A.get(i) / SudokuConfig.SUDOKU9X9_SIZE;
-            y = A.get(i) % SudokuConfig.SUDOKU9X9_SIZE;
+            x = listShuffle.get(i) / SudokuConfig.SUDOKU9X9_SIZE;
+            y = listShuffle.get(i) % SudokuConfig.SUDOKU9X9_SIZE;
             matrixKey[x][y].setText(modelSudoku.numberInCoordinates(x, y));
         }
     }
