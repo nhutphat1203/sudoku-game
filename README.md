@@ -1,5 +1,9 @@
 # sudoku-game
 The project for the subject Software Technologies at An Giang University
+# Features
+- 9x9 Sudoku Board: The Sudoku game features a 9x9 grid where players fill in numbers from 1 to 9 in empty cells.
+- Selectable Difficulty Levels: Players can choose from three difficulty levels: easy, medium, and hard.
+- View Solution: Players have the option to use the solution to complete the game and view the answer for a Sudoku puzzle. 
 # Language
 Java
 # Member
